@@ -9,9 +9,9 @@ const playAgainBtn = document.querySelector("dialog button");
 const score = document.querySelector(".score");
 const scoreAtb = document.querySelector(".score-atb"); // All time best
 const wrapper = document.querySelector(".wrapper");
-// const words = ["pack", "stubborn", "dentist", "stool"]; //Max limit is 8 Min is 4
-// const word = words[Math.floor(Math.random() * words.length)]; // Simulating a random word
 const word = "abba";
+const arr = []; // Global array that holds all guessed values. We use this array to check for repetetive guesses
+
 //Setting up variable in localStorage
 if (!localStorage.getItem("allTimeBest")) {
   localStorage.setItem("allTimeBest", 0);
@@ -21,20 +21,53 @@ if (!localStorage.getItem("allTimeBest")) {
 let lengthLeft = word.length;
 let lives = 6;
 
+// Funtionality to input field
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  console.log(letterInput.value);
-  if (checkLetter(letterInput.value)) {
-    expose(letterInput.value);
-  } else {
-    amputate();
-  }
-  //Updating the modal data on each submission
-  updateModal();
+  // We wrap the entire code under an if to prevent repetetive guessing, i.e guessing a letter that has already been tried through button or input
+  // We see if the user guess is not in the global array(no repetition of guess) and only then execute the rest of the code inside the if statement
+  if (!inArr(arr, letterInput.value.toLowerCase())) {
+    //Converting the input to lowercase as checkletter() and expose use lowercase letters for comparison in string "word" and data-letter
+    if (checkLetter(letterInput.value.toLowerCase())) {
+      expose(letterInput.value.toLowerCase());
+    } else {
+      amputate();
+    }
+    //Updating the modal data on each submission
+    updateModal();
 
-  // Checking for win after each submission
-  checkForWin();
+    // Checking for win after each submission
+    checkForWin();
+
+    //Pushing the guess into global array
+    arr.push(letterInput.value.toLowerCase());
+    console.log(arr);
+
+    //Deactivating the button that carries the same letter as the guess through input or else repetitive guesses could be made
+    buttons.forEach((button) => {
+      if (button.innerHTML.toLowerCase() === letterInput.value.toLowerCase()) {
+        deactivate(button);
+      }
+    });
+  }
   letterInput.value = "";
+});
+
+// Functionality to buttons
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    // !! CONVERT THE INNERHTML TO LOWERCASE AS CHECKLETTER CHECKS THE  STRING "word"  WHICH HAS LOWERCASE LETTERS AND expose() CHECKS THE DATA-LETTER THAT HAS LOWERCASE LETTERS
+    if (checkLetter(button.innerHTML.toLowerCase())) {
+      expose(button.innerHTML.toLowerCase());
+    } else {
+      amputate();
+    }
+    updateModal();
+    checkForWin();
+    arr.push(button.innerHTML.toLowerCase());
+    console.log(arr);
+    deactivate(button);
+  });
 });
 
 playAgainBtn.addEventListener("click", () => {
@@ -84,7 +117,6 @@ const expose = (c) => {
 //Function to amputate hangman after a wrong guess
 const amputate = () => {
   lives -= 1;
-  console.log(lives);
   // We've named the svg files such that when lives lowers, the svg to display
   hangman.src = `./imgs/${lives}.svg`;
   checkForLoss();
@@ -96,10 +128,7 @@ const checkForLoss = () => {
     if (lives > localStorage.getItem("allTimeBest")) {
       localStorage.setItem("allTimeBest", lives);
     }
-    state.textContent = "lose";
-    state.style.color = "red";
-    modal.style.display = "block";
-    wrapper.style.backgroundColor = "rgba(0,0,0,0.5)";
+    showmodal("lose !", "red");
   }
 };
 
@@ -110,10 +139,7 @@ const checkForWin = () => {
     if (lives > localStorage.getItem("allTimeBest")) {
       localStorage.setItem("allTimeBest", lives);
     }
-    state.textContent = "win !";
-    state.style.color = "green";
-    modal.style.display = "block";
-    wrapper.style.backgroundColor = "rgba(0,0,0,0.5)";
+    showmodal("win !", "green");
   }
 };
 
@@ -125,6 +151,30 @@ const updateModal = () => {
     lives > localStorage.getItem("allTimeBest")
       ? lives
       : localStorage.getItem("allTimeBest");
+};
+
+//Function to show modal and we pass parameters to display win and loss accordingly
+const showmodal = (s, colour) => {
+  state.textContent = s;
+  state.style.color = colour;
+  modal.style.display = "block";
+  wrapper.style.backgroundColor = "rgba(0,0,0,0.5)";
+};
+
+//Function to deactivate the buttons once clicked
+const deactivate = (btn) => {
+  btn.style.pointerEvents = "none";
+  btn.style.opacity = 0;
+};
+
+// Membership function
+const inArr = (arr, c) => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] == c) {
+      return 1;
+    }
+    return 0;
+  }
 };
 
 setup();

@@ -90,7 +90,7 @@ form input {
   flex-wrap: wrap;
   justify-content: center;
   max-width: 800px;
-  z-index: -1;
+  /* z-index: -1; */
 }
 
 .btnPanel button {
