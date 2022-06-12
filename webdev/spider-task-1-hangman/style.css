@@ -1,0 +1,161 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
+
+.wrapper {
+  min-height: 100vh;
+}
+
+header {
+  height: 15vh;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand {
+  text-transform: uppercase;
+  color: white;
+  letter-spacing: 3px;
+  font-weight: 200;
+}
+
+main {
+  min-height: 85vh;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main img {
+  margin: 2rem auto;
+  height: 200px;
+  width: 210 px;
+}
+
+.blanks-holder {
+  width: 300px;
+  height: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.blank {
+  height: 100%;
+  border-bottom: 2px solid black;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  font-size: 2rem;
+  font-weight: 400;
+  display: none;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+form input {
+  outline: none;
+  text-align: center;
+  padding: 5px;
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  margin-left: 0.5rem;
+}
+
+.instruction {
+  font-weight: 400;
+  font-size: 1rem;
+  margin: 1rem 0;
+  color: grey;
+}
+
+.btnPanel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 800px;
+  z-index: -1;
+}
+
+.btnPanel button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: tomato;
+  outline: none;
+  border: none;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin: 0.1rem;
+}
+
+.btnPanel button:hover {
+  opacity: 0.5;
+  transition: 0.2s ease;
+}
+
+dialog {
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border: none;
+  display: none;
+}
+
+dialog > * {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+dialog button {
+  cursor: pointer;
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: tomato;
+  width: 150px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: white;
+  font-size: 1rem;
+}
+
+dialog h1 {
+  font-weight: 600;
+}
+
+dialog h2 {
+  font-weight: 400;
+}
+
+dialog h4 {
+  font-weight: 500;
+  color: grey;
+}

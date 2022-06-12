@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./imgs/favicon.jpg" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Hangman</title>
+  </head>
+  <body>
+    <dialog>
+      <h1>Well played !</h1>
+      <h2>You <span class="state">-</span></h2>
+      <h4>Your Score: <span class="score">0</span></h4>
+      <h4>All time best: <span class="score-atb">0</span></h4>
+      <button>Play Again</button>
+    </dialog>
+    <div class="wrapper">
+      <header>
+        <a href="index.html"><h1 class="brand">Hangman</h1></a>
+      </header>
+      <main>
+        <img src="./imgs/Empty.svg" class="hangman" />
+        <div class="blanks-holder"></div>
+        <form>
+          <label>Enter the letter you guess : </label>
+          <input type="text" required maxlength="1" pattern="[a-zA-Z]" />
+        </form>
+        <h1 class="instruction">(Or click the letters below)</h1>
+        <div class="btnPanel">
+          <button>A</button>
+          <button>B</button>
+          <button>C</button>
+          <button>D</button>
+          <button>E</button>
+          <button>F</button>
+          <button>G</button>
+          <button>H</button>
+          <button>I</button>
+          <button>J</button>
+          <button>K</button>
+          <button>L</button>
+          <button>M</button>
+          <button>N</button>
+          <button>O</button>
+          <button>P</button>
+          <button>Q</button>
+          <button>R</button>
+          <button>S</button>
+          <button>T</button>
+          <button>U</button>
+          <button>V</button>
+          <button>W</button>
+          <button>X</button>
+          <button>Y</button>
+          <button>Z</button>
+        </div>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
