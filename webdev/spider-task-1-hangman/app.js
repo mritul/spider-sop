@@ -9,6 +9,7 @@ const playAgainBtn = document.querySelector("dialog button");
 const score = document.querySelector(".score");
 const scoreAtb = document.querySelector(".score-atb"); // All time best
 const wrapper = document.querySelector(".wrapper");
+const wordContainer = document.querySelector(".word");
 const word = "abba";
 const arr = []; // Global array that holds all guessed values. We use this array to check for repetetive guesses
 
@@ -151,12 +152,14 @@ const updateModal = () => {
     lives > localStorage.getItem("allTimeBest")
       ? lives
       : localStorage.getItem("allTimeBest");
+  wordContainer.textContent = word;
 };
 
 //Function to show modal and we pass parameters to display win and loss accordingly
 const showmodal = (s, colour) => {
   state.textContent = s;
   state.style.color = colour;
+  wordContainer.style.color = colour;
   modal.style.display = "block";
   wrapper.style.backgroundColor = "rgba(0,0,0,0.5)";
 };
