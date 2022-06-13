@@ -22,7 +22,6 @@ window.addEventListener("load", () => {
     const word = await fetchData("https://random-word-api.herokuapp.com/word");
     const wordContainer = document.querySelector(".word"); // The span holding word name in modal
     const arr = []; // Global array that holds all guessed values. We use this array to check for repetetive guesses
-    console.log(word);
 
     //Setting up variable in localStorage
     if (!localStorage.getItem("allTimeBest")) {
