@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
 
   const start = async () => {
     const word = await fetchData("https://random-word-api.herokuapp.com/word");
-    const wordContainer = document.querySelector(".word");
+    const wordContainer = document.querySelector(".word"); // The span holding word name in modal
     const arr = []; // Global array that holds all guessed values. We use this array to check for repetetive guesses
 
     //Setting up variable in localStorage
@@ -48,8 +48,8 @@ window.addEventListener("load", () => {
         //Updating the modal data on each submission
         updateModal();
 
-        // Checking for win after each submission
-        checkForWin();
+        // // Checking for win after each submission
+        // checkForWin();
 
         //Pushing the guess into global array
         arr.push(letterInput.value.toLowerCase());
@@ -122,6 +122,8 @@ window.addEventListener("load", () => {
           // childNodes of blank is the <h1> tag containing the letter text inside a single element array so childNodes[0] returns the <h1> element which we can then give display block(we initially hide it in css)
           blank.childNodes[0].style.display = "block";
           lengthLeft -= 1; // Every exposed letter means lengthLeft is reduced by 1. We can use this for score calculation and finding if game is over
+          // Checking for win after each submission
+          checkForWin();
         }
       });
     };
