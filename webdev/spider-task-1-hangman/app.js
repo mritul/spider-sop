@@ -22,6 +22,7 @@ window.addEventListener("load", () => {
     const word = await fetchData("https://random-word-api.herokuapp.com/word");
     const wordContainer = document.querySelector(".word"); // The span holding word name in modal
     const arr = []; // Global array that holds all guessed values. We use this array to check for repetetive guesses
+    console.log(word);
 
     //Setting up variable in localStorage
     if (!localStorage.getItem("allTimeBest")) {
@@ -48,9 +49,6 @@ window.addEventListener("load", () => {
         //Updating the modal data on each submission
         updateModal();
 
-        // // Checking for win after each submission
-        // checkForWin();
-
         //Pushing the guess into global array
         arr.push(letterInput.value.toLowerCase());
 
@@ -76,7 +74,7 @@ window.addEventListener("load", () => {
           amputate();
         }
         updateModal();
-        checkForWin();
+        // checkForWin();
         arr.push(button.innerHTML.toLowerCase());
         deactivate(button);
       });
@@ -136,6 +134,7 @@ window.addEventListener("load", () => {
       checkForLoss();
     };
 
+    //Function to check loss on every amputation
     const checkForLoss = () => {
       // We update the localStorage on game over i.e before the modal displays
       if (lives == 0) {
@@ -161,10 +160,7 @@ window.addEventListener("load", () => {
     const updateModal = () => {
       score.textContent = lives;
       // If current game's score is greater than the all time best in localStorage, then we set alltimebest in modal as lives which is the current alltimebest
-      scoreAtb.textContent =
-        lives > localStorage.getItem("allTimeBest")
-          ? lives
-          : localStorage.getItem("allTimeBest");
+      scoreAtb.textContent = localStorage.getItem("allTimeBest");
       wordContainer.textContent = word;
     };
 
