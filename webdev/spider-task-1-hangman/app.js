@@ -1,4 +1,8 @@
 window.addEventListener("load", () => {
+  if ("serviceWorker" in navigator) {
+    // register service worker
+    navigator.serviceWorker.register("service-worker.js");
+  }
   const blanksHolder = document.querySelector(".blanks-holder");
   const form = document.querySelector("form");
   const letterInput = document.querySelector("form input");
